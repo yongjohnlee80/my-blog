@@ -22,10 +22,10 @@ COPY . /app
 COPY . /app
 
 # Expose the default MkDocs port
-EXPOSE 8000
+EXPOSE 8001
 
 # Build the site (optional, mainly for debugging during image creation but also useful if needed later)
 RUN mkdocs build
 
 # Run MkDocs server
-CMD ["mkdocs", "serve", "-a", "0.0.0.0:8000"]
+CMD ["mkdocs", "serve", "-a", "0.0.0.0:8001"]
