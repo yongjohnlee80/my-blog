@@ -8,6 +8,7 @@ nav:
   - 🙋‍♂️ About:
     - About Me: about/yongsunglee.md
     - Contact: about/contact.md
+  - 🌐 Services: services.md
   - 🔖 Tags: tags.md
 
 theme:

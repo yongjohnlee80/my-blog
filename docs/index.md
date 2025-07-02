@@ -17,9 +17,12 @@ network:
     - wireguard: VPN
     - pi-hole: DNS
 services:
+    - ollama: personal AI service
     - vaultwarden: password manager
     - mailcow: email service
     - nextcloud: cloud storage and office
+    - jellyfin: media library and service
+    - kasm: personal laboratory
 documents:
     - mk-docs: blogs and documentations
 ```
