@@ -1,0 +1,5 @@
+mkdocs-material>=9.0.0
+mkdocs-blogging-plugin
+mkdocs-rss-plugin
+mkdocs-awesome-tags-plugin
+pymdown-extensions
