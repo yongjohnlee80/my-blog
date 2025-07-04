@@ -11,17 +11,20 @@ Here’s a quick overview of the systems and services currently running on my ho
 
 ```yaml
 system:
-    - proxmox: 3 nodes
-    - truenas: 2 nodes
+  - proxmox: 3 nodes
+  - truenas: 2 nodes
 network:
-    - wireguard: VPN
-    - pi-hole: DNS
+  - wireguard: VPN
+  - pi-hole: DNS
 services:
-    - vaultwarden: password manager
-    - mailcow: email service
-    - nextcloud: cloud storage and office
+  - ollama: personal AI service
+  - vaultwarden: password manager
+  - mailcow: email service
+  - nextcloud: cloud storage and office
+  - jellyfin: media library and service
+  - kasm: personal laboratory
 documents:
-    - mk-docs: blogs and documentations
+  - mk-docs: blogs and documentations
 ```
 Everything is containerized, secured, and continuously evolving — and I document the process as I go.
 
@@ -32,10 +35,3 @@ Daily Learnings — Notes and reflections on what worked, what didn’t, and wha
 
 Behind the Scenes — Deep dives into system design, architecture choices, and lessons from real-world issues.
 
-## 📬 Get in Touch
-Have questions, suggestions, or want to collaborate? Feel free to reach out:
-
-Email: [john@johnosoft.org](mailto:john@johnosoft.org)
-
-## 🙏 Special Thanks
-This site is proudly built with the incredible [MkDocs Material theme](https://squidfunk.github.io/mkdocs-material/) — an open-source project by @squidfunk that makes technical documentation not only easy to write, but beautiful to read. 💡
