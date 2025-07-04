@@ -17,16 +17,16 @@ Self-hosting an email server has always been a hot topic among homelab enthusias
 
 ## Why Run Your Own Email Service?
 
-### 1. Privacy & Control
+• Privacy & Control
 Most commercial email providers can (and do) access users’ messages in various ways. Hosting your own server grants you full control over how your data is stored and managed, removing a layer of third-party oversight.
 
-### 2. Centralized Identity Management
+• Centralized Identity Management
 Operating an in-house email domain lets you maintain a consistent email address across all personal homelab services. This approach simplifies user provisioning and management when new sign-ups or permissions become necessary.
 
-### 3. In-House SMTP for Notifications
+• In-House SMTP for Notifications
 Services like Nextcloud, Vaultwarden, or any other productivity tools often require outbound email for user alerts or password recovery. While external SMTP relays exist, hosting your own server removes extra dependencies and simplifies testing in custom scenarios.
 
-### 4. Development & Testing Flexibility
+• Development & Testing Flexibility
 As a full-stack developer, I frequently need multiple test email accounts to validate sign-up and authentication workflows. Relying on external providers (e.g., Gmail) can introduce complexity (OAuth or additional security restrictions), making automated tests harder. Self-hosting avoids these roadblocks.
 
 ---
@@ -46,9 +46,9 @@ I chose a Contabo VPS for its affordability and capacity (4 CPU cores, 6 GB RAM,
 
 [Mailcow](https://mailcow.email/) is an open-source, Docker-based email server suite that integrates key components—Postfix, Dovecot, Rspamd, SOGo, and more—within containers. This approach simplifies updates and ensures better isolation. Mailcow also offers:
 
-- **SSL/TLS Encryption**: Automatic certificate handling via Let’s Encrypt or manual configuration.
-- **Security Policies**: Two-factor authentication, enforcing DMARC/DKIM/SPF, and powerful spam filtering through Rspamd.
-- **User-Friendly GUI**: An intuitive web interface for managing mail domains, aliases, mailboxes, and monitoring activity.
+• **SSL/TLS Encryption**: Automatic certificate handling via Let’s Encrypt or manual configuration.
+• **Security Policies**: Two-factor authentication, enforcing DMARC/DKIM/SPF, and powerful spam filtering through Rspamd.
+• **User-Friendly GUI**: An intuitive web interface for managing mail domains, aliases, mailboxes, and monitoring activity.
 
 These built-in features minimize the time and effort you’d otherwise need to assemble such a stack manually.
 
@@ -58,10 +58,10 @@ These built-in features minimize the time and effort you’d otherwise need to a
 
 ### Domain & DNS Setup
 Before installing Mailcow, set up DNS for your domain (e.g., johnosoft.org):
-- **A Record**: Points mail.johnosoft.org to your server’s IP.
-- **MX Record**: Points to mail.johnosoft.org.
-- **SPF Record**: Set up a TXT record (e.g., `v=spf1 mx ~all`) or more specific if you know the IP.
-- **DKIM / DMARC**: Will be configured later within Mailcow.
+• **A Record**: Points mail.johnosoft.org to your server’s IP.
+• **MX Record**: Points to mail.johnosoft.org.
+• **SPF Record**: Set up a TXT record (e.g., `v=spf1 mx ~all`) or more specific if you know the IP.
+• **DKIM / DMARC**: Will be configured later within Mailcow.
 
 If you’re using a single domain (e.g., johnosoft.org) both for homelab services (behind Cloudflare) and direct mail delivery, be mindful of how you manage certificates. Cloudflare can issue and renew certificates for proxied (orange-cloud) hosts, but publicly exposed subdomains (like your mail server) typically require a valid certificate from Let’s Encrypt or another CA.
 
@@ -76,19 +76,19 @@ This structure allows you to manage multiple domains or subdomains in a consiste
 
 ## Installing Mailcow
 
-1. **Clone the Repository**
+### 1. **Clone the Repository**
 ``` bash
-git clone https://github.com/mailcow/mailcow-dockerized
+git clone https://github.com/mailcow/mailcow•dockerized
 cd mailcow-dockerized
 ```
 
-2. **Generate Configuration File**
+### 2. **Generate Configuration File**
 ``` bash
 ./generate_config.sh
 ```
-- Provide your domain (e.g., mail.johnosoft.org) when prompted.
+• Provide your domain (e.g., mail.johnosoft.org) when prompted.
 
-3. **Configure IP bindings**
+### 3. **Configure IP bindings**
 Required only if you need a reverse proxy for multiple services. Otherwise, skip to step 6.
 ```toml
 # modify 'mailcow.conf' to bind the IP and ports so that reverse proxy can 
@@ -102,7 +102,7 @@ SKIP_LETS_ENCRYPT=y
 AUTODISCOVER_SAN=n 
 ```
 
-4. **Create docker-compose.override.yml**
+### 4. **Create docker-compose.override.yml**
 Create an external network (“proxy”) if you want Mailcow services and your reverse proxy on the same Docker network.
 
 ```bash
@@ -132,7 +132,7 @@ networks:
     external: true
 ```
 
-5. **Create TLS certificates for your mail domain**
+### 5. **Create TLS certificates for your mail domain**
 Install Certbot, then request certificates for your domain.
 ```bash
 sudo apt update
@@ -154,7 +154,7 @@ sudo chmod 640 <desination_folder>/privkey.pem
 sudo chmod 644 <desination_folder>/fullchain.pem
 ```
 
-6. **Start Mailcow**
+### 6. **Start Mailcow**
 ```bash
 sudo docker-compose up -d
 ```
@@ -164,7 +164,7 @@ sudo docker-compose up -d
 sudo docker-compose ps
 ```
 
-7. **Configure your reverse proxy (nginx)**
+### 7. **Configure your reverse proxy (nginx)**
 Example configuration:
 ```yaml title:"docker-compose.yml"
 version: "3.8"
@@ -242,24 +242,25 @@ server {
 }
 ```
 
-8. **Administrating Webmail**
-    a. Log in to Admin Panel: `mail.johnosoft.org/admin`, and change the credential immediately.
-        * Username: admin
-        * Password: moohoo
-    b. Configure 2FA right away
+### 8. **Administrating Webmail**
+• Log in to Admin Panel: `mail.johnosoft.org/admin`, and change the credential immediately.
+> Username: admin
+> Password: moohoo
 
-9. **Configure DKIM and DMARC**
-   - Go to **Configuration** → **ARC/DKIM keys** to generate a new key.
-   - Add the displayed DKIM record to your DNS.
-   - For DMARC, add a TXT record in your DNS: read about DMARC as it's pretty straight forward, and will only take a few minutes.
-   - The following `_dmarc` TXT record instructs the policy of "quarantine" (e.g., spam folder) of 50% threshold. In other words, this record is telling recipients that if a message does not pass DMARC alignment, half of those failing messages should be quarantined, and aggregate feedback will be sent to the specified email address.
+• Configure 2FA right away
+
+### 9. **Configure DKIM and DMARC**
+• Go to **Configuration** → **ARC/DKIM keys** to generate a new key.
+• Add the displayed DKIM record to your DNS.
+• For DMARC, add a TXT record in your DNS: read about DMARC as it's pretty straight forward, and will only take a few minutes.
+• The following `_dmarc` TXT record instructs the policy of "quarantine" (e.g., spam folder) of 50% threshold. In other words, this record is telling recipients that if a message does not pass DMARC alignment, half of those failing messages should be quarantined, and aggregate feedback will be sent to the specified email address.
     ```text
     "v=DMARC1; p=quarantine; pct=50; rua=mailto:postmaster@mail.johnosoft.org;"
     ```
 
-10. **Create mailbox (a user) and test it**
-    - Under **Mail setup** → **Mailboxes**, create user mailboxes as needed.
-    - Send and receive test emails to confirm that everything works correctly. Use [mail-tester](https://www.mail-tester.com/) to verify and review the score of your email-server's reputation.
+### 10. **Create mailbox (a user) and test it**
+• Under **Mail setup** → **Mailboxes**, create user mailboxes as needed.
+• Send and receive test emails to confirm that everything works correctly. Use [mail-tester](https://www.mail-tester.com/) to verify and review the score of your email-server's reputation.
 ---
 
 ## Final Thoughts
