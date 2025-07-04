@@ -66,9 +66,9 @@ Before installing Mailcow, set up DNS for your domain (e.g., johnosoft.org):
 If you’re using a single domain (e.g., johnosoft.org) both for homelab services (behind Cloudflare) and direct mail delivery, be mindful of how you manage certificates. Cloudflare can issue and renew certificates for proxied (orange-cloud) hosts, but publicly exposed subdomains (like your mail server) typically require a valid certificate from Let’s Encrypt or another CA.
 
 ### Reverse Proxy Configuration
-A common approach is to install an Nginx reverse proxy on the VPS. With a reverse proxy:
-1. Services behind Cloudflare stay proxied, offloading certificate renewal to Cloudflare.
-2. Mail traffic typically remains off Cloudflare’s proxy to ensure reliable email deliverability. Certbot or another ACME client can then handle certificates for mail subdomains independently.
+A common approach is to install an Nginx reverse proxy on the VPS. With a reverse proxy:  
+1. Services behind Cloudflare stay proxied, offloading certificate renewal to Cloudflare.  
+2. Mail traffic typically remains off Cloudflare’s proxy to ensure reliable email deliverability. Certbot or another ACME client can then handle certificates for mail subdomains independently.  
 
 This structure allows you to manage multiple domains or subdomains in a consistent way, while isolating the email server’s security requirements.
 
@@ -165,7 +165,8 @@ sudo docker-compose ps
 ```
 
 ### 7. **Configure your reverse proxy (nginx)**
-Example configuration:
+* Example configuration:
+
 ```yaml title:"docker-compose.yml"
 version: "3.8"
 
