@@ -1,7 +1,7 @@
 ---
 date: 2025-07-02
 categories:
-  - Documentation
+  - HomeLab
 tags: 
   - Blog
 ---
@@ -11,7 +11,7 @@ tags:
 It finally happened. After years of dreaming about having my own little corner of the internet to document my homelab adventures, rants, discoveries, and occasional tech mishaps — **Johnosoft is live**.
 
 And honestly? I thought this was going to be a weekend of pain, duct tape, and digital grease. But nope — building this site with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) was *weirdly* smooth. Like, suspiciously smooth. Like… *“is this a trap?”* kind of smooth.
-
+<!-- more -->
 ---
 
 ## 🧱 Zero to Site in... Not That Long

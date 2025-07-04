@@ -1,7 +1,7 @@
 ---
 date: 2025-07-03
 categories:
-  - Documentation
+  - HomeLab
 tags: 
     - Blog
     - Mailcow
@@ -9,10 +9,10 @@ tags:
     - nginx
 ---
 
-# Setting Up a Self-Hosted Email Server with Mailcow
+# 📧 Setting Up a Self-Hosted Email Server with Mailcow
 
 Self-hosting an email server has always been a hot topic among homelab enthusiasts and privacy-conscious users. After years of running various services in a Proxmox-based homelab—exposed selectively over the internet through Cloudflare tunnels—my focus shifted to creating a more integrated and privacy-preserving email solution. This blog post shares the rationale, benefits, and high-level setup details of running your own email server, with particular emphasis on Mailcow.
-
+<!-- more -->
 ---
 
 ## Why Run Your Own Email Service?

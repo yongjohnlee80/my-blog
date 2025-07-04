@@ -3,7 +3,8 @@ site_url: https://johnosoft.org/blogs
 
 nav:
   - 🏠 Home: index.md
-  - Blog: blog/index.md
+  - 🧠 Blog:
+    - blog/index.md
   - 📚 Documents: documents/
   - 🙋‍♂️ About:
     - About Me: about/yongsunglee.md
@@ -42,6 +43,7 @@ theme:
     - navigation.expand
     - navigation.top
     - navigation.footer
+    - navigation.indexes
 
     - toc.integrate
     - content.code.copy
@@ -54,7 +56,12 @@ plugins:
   - search
   - tags
   - blog:
-      categories_pagination: true
+      blog_dir: blog
+      blog_toc: true
+      post_excerpt: required
+      archive: true
+      archive_date_format: MMMM yyyy
+      categories: true
   - rss:
       match_path: blog/posts/.* 
       date_from_meta:
