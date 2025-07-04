@@ -17,16 +17,16 @@ Self-hosting an email server has always been a hot topic among homelab enthusias
 
 ## Why Run Your Own Email Service?
 
-• Privacy & Control
+• **Privacy & Control**  
 Most commercial email providers can (and do) access users’ messages in various ways. Hosting your own server grants you full control over how your data is stored and managed, removing a layer of third-party oversight.
 
-• Centralized Identity Management
+• **Centralized Identity Management**   
 Operating an in-house email domain lets you maintain a consistent email address across all personal homelab services. This approach simplifies user provisioning and management when new sign-ups or permissions become necessary.
 
-• In-House SMTP for Notifications
+• **In-House SMTP for Notifications**  
 Services like Nextcloud, Vaultwarden, or any other productivity tools often require outbound email for user alerts or password recovery. While external SMTP relays exist, hosting your own server removes extra dependencies and simplifies testing in custom scenarios.
 
-• Development & Testing Flexibility
+• **Development & Testing Flexibility**  
 As a full-stack developer, I frequently need multiple test email accounts to validate sign-up and authentication workflows. Relying on external providers (e.g., Gmail) can introduce complexity (OAuth or additional security restrictions), making automated tests harder. Self-hosting avoids these roadblocks.
 
 ---
@@ -34,8 +34,8 @@ As a full-stack developer, I frequently need multiple test email accounts to val
 ## The Challenges
 
 ### 1. Hosting Requirements
-• **Open Ports** – Many consumer ISPs filter essential email ports (25, 587, etc.). Renting a VPS that supports open email ports is often mandatory.  
-• **Ongoing Maintenance** – Self-hosted email requires monitoring DNS records (SPF, DKIM, DMARC), SSL/TLS certificates, spam filtering, and security patches.
+• **Open Ports**   – Many consumer ISPs filter essential email ports (25, 587, etc.). Renting a VPS that supports open email ports is often mandatory.  
+• **Ongoing Maintenance**   – Self-hosted email requires monitoring DNS records (SPF, DKIM, DMARC), SSL/TLS certificates, spam filtering, and security patches.
 
 ### 2. VPS Considerations
 I chose a Contabo VPS for its affordability and capacity (4 CPU cores, 6 GB RAM, 400 GB SSD). This hardware is sufficient not just for Mailcow, but also for hosting additional services like Vaultwarden and documentation blogs. For users planning to run Mailcow alone, the installation process is straightforward. However, combining multiple services on one VPS may require extra work with a reverse proxy and port management.
@@ -46,9 +46,9 @@ I chose a Contabo VPS for its affordability and capacity (4 CPU cores, 6 GB RAM,
 
 [Mailcow](https://mailcow.email/) is an open-source, Docker-based email server suite that integrates key components—Postfix, Dovecot, Rspamd, SOGo, and more—within containers. This approach simplifies updates and ensures better isolation. Mailcow also offers:
 
-• **SSL/TLS Encryption**: Automatic certificate handling via Let’s Encrypt or manual configuration.
-• **Security Policies**: Two-factor authentication, enforcing DMARC/DKIM/SPF, and powerful spam filtering through Rspamd.
-• **User-Friendly GUI**: An intuitive web interface for managing mail domains, aliases, mailboxes, and monitoring activity.
+• **SSL/TLS Encryption**: Automatic certificate handling via Let’s Encrypt or manual configuration.  
+• **Security Policies**: Two-factor authentication, enforcing DMARC/DKIM/SPF, and powerful spam filtering through Rspamd.  
+• **User-Friendly GUI**: An intuitive web interface for managing mail domains, aliases, mailboxes, and monitoring activity.  
 
 These built-in features minimize the time and effort you’d otherwise need to assemble such a stack manually.
 
@@ -58,10 +58,10 @@ These built-in features minimize the time and effort you’d otherwise need to a
 
 ### Domain & DNS Setup
 Before installing Mailcow, set up DNS for your domain (e.g., johnosoft.org):
-• **A Record**: Points mail.johnosoft.org to your server’s IP.
-• **MX Record**: Points to mail.johnosoft.org.
-• **SPF Record**: Set up a TXT record (e.g., `v=spf1 mx ~all`) or more specific if you know the IP.
-• **DKIM / DMARC**: Will be configured later within Mailcow.
+• **A Record**: Points mail.johnosoft.org to your server’s IP.  
+• **MX Record**: Points to mail.johnosoft.org.  
+• **SPF Record**: Set up a TXT record (e.g., `v=spf1 mx ~all`) or more specific if you know the IP.  
+• **DKIM / DMARC**: Will be configured later within Mailcow.  
 
 If you’re using a single domain (e.g., johnosoft.org) both for homelab services (behind Cloudflare) and direct mail delivery, be mindful of how you manage certificates. Cloudflare can issue and renew certificates for proxied (orange-cloud) hosts, but publicly exposed subdomains (like your mail server) typically require a valid certificate from Let’s Encrypt or another CA.
 
@@ -250,17 +250,17 @@ server {
 • Configure 2FA right away
 
 ### 9. **Configure DKIM and DMARC**
-• Go to **Configuration** → **ARC/DKIM keys** to generate a new key.
-• Add the displayed DKIM record to your DNS.
-• For DMARC, add a TXT record in your DNS: read about DMARC as it's pretty straight forward, and will only take a few minutes.
-• The following `_dmarc` TXT record instructs the policy of "quarantine" (e.g., spam folder) of 50% threshold. In other words, this record is telling recipients that if a message does not pass DMARC alignment, half of those failing messages should be quarantined, and aggregate feedback will be sent to the specified email address.
+• Go to **Configuration** → **ARC/DKIM keys** to generate a new key.  
+• Add the displayed DKIM record to your DNS.  
+• For DMARC, add a TXT record in your DNS: read about DMARC as it's pretty straight forward, and will only take a few minutes.  
+• The following `_dmarc` TXT record instructs the policy of "quarantine" (e.g., spam folder) of 50% threshold. In other words, this record is telling recipients that if a message does not pass DMARC alignment, half of those failing messages should be quarantined, and aggregate feedback will be sent to the specified email address.  
     ```text
     "v=DMARC1; p=quarantine; pct=50; rua=mailto:postmaster@mail.johnosoft.org;"
     ```
 
 ### 10. **Create mailbox (a user) and test it**
-• Under **Mail setup** → **Mailboxes**, create user mailboxes as needed.
-• Send and receive test emails to confirm that everything works correctly. Use [mail-tester](https://www.mail-tester.com/) to verify and review the score of your email-server's reputation.
+• Under **Mail setup** → **Mailboxes**, create user mailboxes as needed.  
+• Send and receive test emails to confirm that everything works correctly. Use [mail-tester](https://www.mail-tester.com/) to verify and review the score of your email-server's reputation.  
 ---
 
 ## Final Thoughts
