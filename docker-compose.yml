@@ -5,14 +5,15 @@ services:
     build: .
     container_name: johno-blog
     ports:
-      - "8001:8001" # Expose port 8000
+      - "8001:8001"
     volumes:
       - .:/app # Mount project directory for live editing (optional)
-    networks:
-      cloudflared-network:
-        ipv4_address: 172.21.0.10
     restart: unless-stopped
 
+    networks:
+      - proxy
+
 networks:
-  cloudflared-network:
+  proxy:
     external: true
+
