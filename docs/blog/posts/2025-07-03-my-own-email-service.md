@@ -110,7 +110,7 @@ Create an external network (“proxy”) if you want Mailcow services and your r
 docker network create proxy
 ```
 
-```yaml
+```yaml title="docker-compose.override.yml"
 services:
   postfix-mailcow:
     ports:
@@ -167,7 +167,7 @@ sudo docker-compose ps
 ### 7. **Configure your reverse proxy (nginx)**
 * Example configuration:
 
-```yaml title:"docker-compose.yml"
+```yaml
 version: "3.8"
 
 services:
@@ -191,7 +191,7 @@ networks:
 ```
 
 Then map the Mailcow endpoints in Nginx configuration to proxy traffic to Mailcow’s internal Nginx container (port 8080).
-```text title:"mailcow.conf"
+```text title="mailcow.conf"
 server {
     listen 80;
     server_name mail.johnosoft.org autoconfig.johnosoft.org autodiscover.johnosoft.org;
