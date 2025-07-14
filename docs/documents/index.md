@@ -1,5 +1,5 @@
 # Documentations
 
-Nothing yet
+## Proxmox Administration
 
-* [sample](coding/sample.md)
+* [Handling VM disk space shortage](../blog/posts/2025-07-10-resizing-vm-disk-space.md)
