@@ -38,7 +38,7 @@ As a full-stack developer, I frequently need multiple test email accounts to val
 • **Ongoing Maintenance**   – Self-hosted email requires monitoring DNS records (SPF, DKIM, DMARC), SSL/TLS certificates, spam filtering, and security patches.
 
 ### 2. VPS Considerations
-I chose a Contabo VPS for its affordability and capacity (4 CPU cores, 6 GB RAM, 400 GB SSD). This hardware is sufficient not just for Mailcow, but also for hosting additional services like Vaultwarden and documentation blogs. For users planning to run Mailcow alone, the installation process is straightforward. However, combining multiple services on one VPS may require extra work with a reverse proxy and port management.
+I chose a Contabo VPS for its affordability and capacity (4 CPU cores, 6 GB RAM, 400 GB SSD at US $5.00). This hardware is sufficient not just for Mailcow, but also for hosting additional services like Vaultwarden and documentation blogs. For users planning to run Mailcow alone, the installation process is straightforward. However, combining multiple services on one VPS may require extra work with a reverse proxy and port management.
 
 ---
 
